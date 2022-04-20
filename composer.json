@@ -59,10 +59,10 @@
 		},
 		"laravel": {
 			"providers": [
-				"LearnCodeWeb\\FilesUploadAndImageResize\\FileUploadServiceProvider"
+				"LearnCodeWeb\\FilesUploadAndImageResize\\FilesUploadServiceProvider"
 			],
 			"aliases": {
-				"Image": "LearnCodeWeb\\FilesUploadAndImageResize\\Facades\\FilesUpload"
+				"FilesUpload": "LearnCodeWeb\\FilesUploadAndImageResize\\Facades\\FilesUpload"
 			}
 		}
 	}
