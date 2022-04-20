@@ -36,8 +36,5 @@
 	"license": "MIT",
 	"support": {
 		"issues": "https://github.com/LearnCodeWeb/multi-files-upload-and-image-resizer/issues"
-	},
-	"require": {
-		"composer/installers": "1.*"
 	}
 }
