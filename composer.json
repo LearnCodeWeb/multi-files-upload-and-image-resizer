@@ -50,7 +50,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"LearnCodeWeb\\filesupload\\": "LearnCodeWeb/filesupload/"
+			"learncodeweb\\filesupload\\": "learncodeweb/filesupload/src"
 		}
 	},
 	"extra": {
