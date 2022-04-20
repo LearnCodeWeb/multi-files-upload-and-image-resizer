@@ -7,7 +7,7 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 ## Composer installation:
 
 ```composer
-composer require learncodeweb/upload-files-with-image-thumb-and-resizer
+composer require learncodeweb/filesupload
 ```
 
 ----
