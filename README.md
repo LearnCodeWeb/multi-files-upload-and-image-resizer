@@ -4,7 +4,7 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 
 ----
 
-Composer installation:
+## Composer installation:
 
 ```composer
 composer require learncodeweb/upload-files-with-image-thumb-and-resizer
@@ -26,9 +26,32 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 10) Files Extension Filters.
 11) File Size Limit for Uploading.
 
+
+## All parameters that you need to set in constructor
+
+|   Parameters         |   Default Value   |   Description |
+|----------------------|-------------------|---------------|
+|   Response format    |   array           |   You can set to json or array    |
+|   Allow extensions   |   Not set         |   You can set the file extensions in array    |
+|   Dir path           |   false           |   Folder name where you need to save images [‘../Upload/’]. If you set the thumbs size array, the thumb folder will be created and thumb files move there |
+|   Dir permission     |   0655            |   You can set the permission of newly created Dir.   |
+
+## All parameters that you need to set in method
+
+|   Parameters          |   Default Value   |   Description    |
+|-----------------------|-------------------|------------------|
+|   Input index name    |   User set        |   You can set your input="file" name index.   |
+|   Check minimum with  |   400             |   Default min with is 400, you can change with any number.    |
+|   Watermark           |   empty           |   You can set watermark array see the below details.  |
+|   Re-name             |   empty           |   Rename uploaded file if you need it. Left empty save files default name.    |
+|   Image Quality       |   100             |   Image quality in percent 1-100. Apply only for images (jpg,jpeg,png,gif).    |
+|   New Width           |   empty           |   If you want to resize the image then pass int value else upload without resizing the image will be saved.   |
+|   Thumb Widths        |   empty           |   If you want to create multiple thumbs than pass int value with array [350,450].  |
+
+
 ----
 
-How to use after installation:
+## How to use after installation:
 
 ```php
 require('../multi-files-upload-and-image-resizer.php');
@@ -39,7 +62,7 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 
 >For watermark you will use array and able to add image as a watermark or text.
 
-**With text below will be the parameters:**
+## With text below will be the parameters:
 ```php
 [
     'value' => "HI I AM ZAID",
@@ -51,7 +74,7 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ];
 ```
 
-**With image below will be the parameters:**
+## With image below will be the parameters:
 ```php
 [
     'value' => "your-image-complete-path",
@@ -60,7 +83,7 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ];
 ```
 
-**And the response will be get like below:**
+## And the response will be get like below:
 
 In the below response you will get the uploaded/not uploaded/bad extensions and success/error flags array or json data.
 
