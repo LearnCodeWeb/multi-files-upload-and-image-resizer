@@ -1,5 +1,5 @@
 {
-	"name": "learncodeweb/upload-files-with-image-thumb-and-resizer",
+	"name": "learncodeweb/filesupload",
 	"description": "A very simple (GD Image) class for upload multiple files. You can create multiple thumbnails, add watermark (text/image), resize and change the quality of the images.",
 	"homepage": "https://learncodeweb.com/web-development/resize-and-upload-multiple-images-using-php-and-ajax/",
 	"type": "resize-and-upload-multiple-images-using-php-and-ajax",
@@ -50,7 +50,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"LearnCodeWeb\\multi-files-upload-and-image-resizer\\": "LearnCodeWeb/multi-files-upload-and-image-resizer/"
+			"LearnCodeWeb\\filesupload\\": "LearnCodeWeb/filesupload/"
 		}
 	},
 	"extra": {
@@ -59,10 +59,10 @@
 		},
 		"laravel": {
 			"providers": [
-				"LearnCodeWeb\\FilesUploadAndImageResize\\FilesUploadServiceProvider"
+				"LearnCodeWeb\\filesupload\\FilesUploadServiceProvider"
 			],
 			"aliases": {
-				"FilesUpload": "LearnCodeWeb\\FilesUploadAndImageResize\\Facades\\FilesUpload"
+				"Image": "LearnCodeWeb\\filesupload\\Facades\\FilesUpload"
 			}
 		}
 	}
