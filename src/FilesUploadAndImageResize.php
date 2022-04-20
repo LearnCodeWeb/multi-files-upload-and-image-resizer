@@ -176,7 +176,7 @@ class FilesUploadAndImageResize
 								foreach ($thumbWidth as $tw) {
 									$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
 									$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
-									$this->param['uploaded-thumb-files'][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
+									$this->param['uploaded-thumb-files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
 									$this->param['path-uploaded-thumb-files'][]	=	$thumbPath; //All uploaded thumbnail files with complete path
 								}
 							}
