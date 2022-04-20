@@ -1,24 +1,52 @@
-# Multi files upload & image resizer
+# Multi files uploader & image resizer
 
 A PHP base class that you can use to upload any file into the server. It is a very lightweight class and highly customizable. You can use this class with any framework or with core PHP.
+
+## Dependencies:
+
+This class is based on the GD library for image processing. If you don’t have this library install it or enable it in php.ini. To install the GD library use the below command.
+
+```
+sudo apt-get install php-gd
+```
+
+After installation makes sure you have a gd.ini file then open the php.ini file and find it below.
+
+```
+;extension=gd
+```
+
+Remove the comment [ **;** ] and change it to below.
+
+```
+extension=gd
+```
 
 ----
 
 ## Composer installation:
 
-```composer
+```
 composer require learncodeweb/filesupload
+```
+
+After installation recreates the autoload file with the help of the below command.
+
+```
+composer dump-autoload
 ```
 
 ----
 
-A PHP base class that you can use to upload any file into the server. It is a very lightweight class and heighly customizable. You can use this class with any framewrok or with core PHP.
+## Class option & features:
+
+A PHP base class that you can use to upload any file into the server. It is a very lightweight class and highly customizable. You can use this class with any framework or with core PHP.
 
 1) Upload Single Or Multiple Files.
 2) Upload Any Type Of Files (Not Only Images).
-3) Image file can Resize.
-4) Create Image Thumbnail (With Keep The Image Aspect Ratio).
-5) You can add watermark (Text, Image).
+3) The image file can Resize.
+4) Create Image Thumbnails (With Keep The Image Aspect Ratio).
+5) You can add a watermark (Text, Image).
 6) Easy Integration With Forms.
 7) Create Any Number Of Thumbnails Under One Upload.
 8) Customizable Paths To Thumbnails Folders.
