@@ -42,12 +42,19 @@ composer dump-autoload
 
 ```php
 use anyFileUpload\FilesUploadAndImageResize as anyFilesUpload;
+
+$files = new anyFilesUpload('array', ['jpg', 'jpeg', 'png'], public_path('uploads'), 0777);
+$files->uploadFiles('files', 250, '', '', 100, '850', ['350']);
+
+dd($files->uploadedData);
 ```
 
 In core PHP just add the autoload.php file to your project like below.
 
 ```php
 required('.../vendor/autoload.php');
+$upload    =    new anyFileUpload\ImageUploadAndResize('array', ['jpeg', 'jpg', 'png'], '../uploads', 0655);
+$upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ```
 
 ## Class option & features:
@@ -91,10 +98,10 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 
 ----
 
-## How to use after installation:
+## How to use with direct access:
 
 ```php
-require('../multi-files-upload-and-image-resizer.php');
+require('../FilesUploadAndImageResize.php'); // File direct access
 $rename    =    rand(1000, 5000) . time(); // left empty if you want the real file name
 $upload    =    new anyFileUpload\ImageUploadAndResize('array', ['jpeg', 'jpg', 'png'], '../uploads', 0655);
 $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
