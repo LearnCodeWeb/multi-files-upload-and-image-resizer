@@ -1,0 +1,48 @@
+{
+	"name": "learncodeweb/upload-files-with-image-thumb-and-resizer",
+	"description": "A very simple (GD Image) class for upload multiple files. You can create multiple thumbnails, add watermark (text/image), resize and change the quality of the images.",
+	"homepage": "https://learncodeweb.com/web-development/resize-and-upload-multiple-images-using-php-and-ajax/",
+	"type": "resize-and-upload-multiple-images-using-php-and-ajax",
+	"keywords": [
+		"PHP",
+		"Compatible with frameworks and core PHP",
+		"Quality upload",
+		"Compress Images",
+		"Any file upload",
+		"Create thumbnails",
+		"Add watermark",
+		"Change the watermark position",
+		"Rename upload files name",
+		"Check file size before upload",
+		"Manage upload file extentions",
+		"Free for commercial use",
+		"File upload class",
+		"Ajax uploader",
+		"Image manipulation",
+		"Dropzone",
+		"Multiple files",
+		"Multiple file upload",
+		"PHP Pagination Class With Bootstrap 4",
+		"Free",
+		"learncodeweb.com"
+	],
+	"minimum-stability": "stable",
+	"authors": [
+		{
+			"name": "Khalid Zaid Bin [Mian Zaid]",
+			"email": "contact@learncodeweb.com"
+		}
+	],
+	"license": "MIT",
+	"autoload": {
+		"classmap": [
+			"./multi-files-upload-and-image-resizer.php"
+		]
+	},
+	"support": {
+		"issues": "https://github.com/LearnCodeWeb/PHP-pagination-class-with-Bootstrap-4/issues"
+	},
+	"require": {
+		"composer/installers": "1.*"
+	}
+}
