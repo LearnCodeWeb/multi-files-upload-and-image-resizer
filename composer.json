@@ -34,11 +34,6 @@
 		}
 	],
 	"license": "MIT",
-	"autoload": {
-		"classmap": [
-			"./multi-files-upload-and-image-resizer.php"
-		]
-	},
 	"support": {
 		"issues": "https://github.com/LearnCodeWeb/multi-files-upload-and-image-resizer/issues"
 	},
