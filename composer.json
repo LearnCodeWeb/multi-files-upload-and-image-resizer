@@ -50,20 +50,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"LearnCodeWeb\\Filesupload\\": "LearnCodeWeb/Filesupload/"
+			"LearnCodeWeb\\filesupload\\": "LearnCodeWeb/filesupload/"
 		}
 	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "1.0-dev"
-		},
-		"laravel": {
-			"providers": [
-				"LearnCodeWeb\\Filesupload\\FilesUploadServiceProvider"
-			],
-			"aliases": {
-				"Image": "LearnCodeWeb\\Filesupload\\Facades\\FilesUpload"
-			}
 		}
 	}
 }
