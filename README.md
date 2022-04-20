@@ -55,26 +55,26 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 11) File Size Limit for Uploading.
 
 
-## All parameters that you need to set in constructor
+## All parameters that you need to set in the constructor
 
 |   Parameters         |   Default Value   |   Description |
 |----------------------|-------------------|---------------|
-|   Response format    |   array           |   You can set to json or array.    |
-|   Allow extensions   |   Not set         |   You can set the file extensions in array.    |
+|   Response format    |   array           |   You can set it to JSON or array.    |
+|   Allow extensions   |   Not set         |   You can set the file extensions in the array.    |
 |   Dir path           |   false           |   Folder name where you need to save images [‘../Upload/’]. If you set the thumbs size array, the thumb folder will be created and thumb files move there. |
-|   Dir permission     |   0655            |   You can set the permission of newly created Dir.   |
+|   Dir permission     |   0655            |   You can set the permission of the newly created Dir.   |
 
-## All parameters that you need to set in method
+## All parameters that you need to set in the method
 
 |   Parameters          |   Default Value   |   Description    |
 |-----------------------|-------------------|------------------|
 |   Input index name    |   User set        |   You can set your input="file" name index.   |
 |   Check minimum with  |   400             |   Default min with is 400, you can change with any number.    |
-|   Watermark           |   empty           |   You can set watermark array see the below details.  |
-|   Re-name             |   empty           |   Rename uploaded file if you need it. Left empty save files default name.    |
+|   Watermark           |   empty           |   You can set the watermark array to see the below details.  |
+|   Re-name             |   empty           |   Rename the uploaded file if you need it. Left empty save files default name.    |
 |   Image Quality       |   100             |   Image quality in percent 1-100. Apply only for images (jpg,jpeg,png,gif).    |
 |   New Width           |   empty           |   If you want to resize the image then pass int value else upload without resizing the image will be saved.   |
-|   Thumb Widths        |   empty           |   If you want to create multiple thumbs than pass int value with array [350,450].  |
+|   Thumb Widths        |   empty           |   If you want to create multiple thumbs then pass int value with array [350,450].  |
 
 
 ----
@@ -88,7 +88,7 @@ $upload    =    new anyFileUpload\ImageUploadAndResize('array', ['jpeg', 'jpg', 
 $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ```
 
->For watermark you will use array and able to add image as a watermark or text.
+>For watermark you will use an array and be able to add the image as a watermark or text.
 
 ## With text below will be the parameters:
 ```php
@@ -102,7 +102,7 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ];
 ```
 
-## With image below will be the parameters:
+## With the image below will be the parameters:
 ```php
 [
     'value' => "your-image-complete-path",
@@ -111,9 +111,9 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ];
 ```
 
-## And the response will be get like below:
+## The response will get like the below:
 
-In the below response you will get the uploaded/not uploaded/bad extensions and success/error flags array or json data.
+In the below response, you will get the uploaded/not uploaded/bad extensions and success/error flags array or JSON data.
 
 ```php
 print "<pre>";
