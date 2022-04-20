@@ -39,7 +39,7 @@ composer dump-autoload
 ----
 
 ## How to import into the project:
-
+In laravel 8/9 (Tested)
 ```php
 use anyFileUpload\FilesUploadAndImageResize as anyFilesUpload;
 
