@@ -49,8 +49,8 @@
 		"ext-gd": "to use GD library based image processing."
 	},
 	"autoload": {
-		"psr-0": {
-			"filesupload\\": "learncodeweb/filesupload/"
+		"psr-4": {
+			"LearnCodeWeb\\FilesUpload\\": "learncodeweb/filesupload/src"
 		}
 	},
 	"extra": {
