@@ -56,6 +56,14 @@
 	"extra": {
 		"branch-alias": {
 			"dev-master": "1.0-dev"
+		},
+		"laravel": {
+			"providers": [
+				"LearnCodeWeb\\FilesUploadAndImageResize\\FileUploadServiceProvider"
+			],
+			"aliases": {
+				"Image": "LearnCodeWeb\\FilesUploadAndImageResize\\Facades\\FilesUpload"
+			}
 		}
 	}
 }
