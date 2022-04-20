@@ -31,9 +31,9 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 
 |   Parameters         |   Default Value   |   Description |
 |----------------------|-------------------|---------------|
-|   Response format    |   array           |   You can set to json or array    |
-|   Allow extensions   |   Not set         |   You can set the file extensions in array    |
-|   Dir path           |   false           |   Folder name where you need to save images [‘../Upload/’]. If you set the thumbs size array, the thumb folder will be created and thumb files move there |
+|   Response format    |   array           |   You can set to json or array.    |
+|   Allow extensions   |   Not set         |   You can set the file extensions in array.    |
+|   Dir path           |   false           |   Folder name where you need to save images [‘../Upload/’]. If you set the thumbs size array, the thumb folder will be created and thumb files move there. |
 |   Dir permission     |   0655            |   You can set the permission of newly created Dir.   |
 
 ## All parameters that you need to set in method
