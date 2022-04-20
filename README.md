@@ -37,7 +37,7 @@ $upload    =    new anyFileUpload\ImageUploadAndResize('array', ['jpeg', 'jpg', 
 $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ```
 
-/* For watermark you will use array and able to add image as a watermark or text. */
+>For watermark you will use array and able to add image as a watermark or text.
 
 **With text below will be the parameters:**
 ```php
@@ -61,6 +61,7 @@ $upload->uploadFiles('files', 250, '', $rename, 100, '850', ['350','450']);
 ```
 
 **And the response will be get like below:**
+
 In the below response you will get the uploaded/not uploaded/bad extensions and success/error flags array or json data.
 
 ```php
