@@ -148,6 +148,7 @@ class FilesUploadAndImageResize
 	 * ['bad-extension-files'] return all files with bad extension which is set by user
 	 * ['bad-extensions'] return only bad extensions which is set by user
 	 * ['uploaded-files'] return all uploaded files
+	 * ['real-uploaded-files'] return all uploaded real files name.
 	 * ['not-uploaded-files'] return all not move files into the destination folder [ Note: Folder (Dir) Permission issue ]
 	 * 
 	 */
@@ -193,6 +194,7 @@ class FilesUploadAndImageResize
 									}
 								}
 
+								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
 								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
 								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
 							} else {
@@ -201,6 +203,7 @@ class FilesUploadAndImageResize
 						} else {
 							// Upload all other files
 							if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
+								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
 								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
 								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
 							} else {
