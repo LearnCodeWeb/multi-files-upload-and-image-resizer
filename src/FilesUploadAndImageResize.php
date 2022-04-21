@@ -166,19 +166,9 @@ class FilesUploadAndImageResize
 					$this->s++;
 
 					$fileInfo		=	pathinfo(basename($_FILES[$fileParamName]['name'][$this->n]), PATHINFO_EXTENSION);
-					$filesName		=	str_replace(" ", "", trim($_FILES[$fileParamName]['name'][$this->n]));
-					$files			=	explode(".", $filesName);
-					$File_Ext   	=   substr($_FILES[$fileParamName]['name'][$this->n], strrpos($_FILES[$fileParamName]['name'][$this->n], '.'));
-
+					$fileName		=	'file-' . $this->s . '-' . rand(0, 999) . time() . '.' . $fileInfo;
 					if ($reName != "") {
-						$fileName	=	$this->s . $reName . $File_Ext;
-					} else {
-						if (count($files) > 2) {
-							array_pop($files);
-							$fileName	=	implode(".", $files) . $File_Ext;
-						} else {
-							$fileName	=	$files[0] . $File_Ext;
-						}
+						$fileName	=	$this->s . $reName . '.' . $fileInfo;
 					}
 					$filePath			=	trim($srcPath . $fileName);
 					if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
