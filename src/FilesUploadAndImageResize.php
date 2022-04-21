@@ -2,6 +2,8 @@
 
 namespace	anyFileUpload;
 
+use Exception;
+
 class FilesUploadAndImageResize
 {
 	protected $allowExtension	=	[];
@@ -37,79 +39,84 @@ class FilesUploadAndImageResize
 	 * 
 	 */
 
-	public function compressImage($sourceURL, $destinationURL, $minImgWidth, $waterMark = [], $quality, $newWidth)
+	public function compressImage(string $sourceURL, string $destinationURL, int $minImgWidth, array $waterMark = [], int $quality, string $newWidth): bool|string
 	{
-		if (!empty($waterMark)) {
-			$waterMark['font-size']		=	(empty($waterMark['font-size'])) ? 25 : $waterMark['font-size'];
-			$waterMark['font-family']	=	(empty($waterMark['font-family'])) ? "../fonts/Myriad-Pro-Regular.ttf" : $waterMark['font-family'];
-			$waterMark['font-color']	=	(empty($waterMark['font-color'])) ? '#000000' : $waterMark['font-color'];
-			$positionX = $waterMark['position-x'] ?? '';
-			$positionY = $waterMark['position-y'] ?? '';
-		}
-
-		$infoImg 	= 	getimagesize($sourceURL);
-		$width		=	$infoImg[0];
-		$height		=	$infoImg[1];
-		if ($width < $minImgWidth) {
-			echo '<div class="alert alert-danger">Image <strong>WIDTH</strong> is less then ' . $minImgWidth . 'px</div>';
-			exit;
-		}
-
-		$image		=	'';
-		if ($infoImg['mime'] == 'image/jpeg') {
-			$image 	= 	imagecreatefromjpeg($sourceURL);
-		} elseif ($infoImg['mime'] == 'image/jpg') {
-			$image 	= 	imagecreatefromjpeg($sourceURL);
-		} elseif ($infoImg['mime'] == 'image/png') {
-			$image 	= 	imagecreatefrompng($sourceURL);
-		} elseif ($infoImg['mime'] == 'image/gif') {
-			$image 	= 	imagecreatefromgif($sourceURL);
-		}
-
-		//Adding watermark
-		if (!empty($waterMark)) {
-			if (!empty($waterMark['value']) && is_file($waterMark['value'])) {
-				$watermark 		= 	imagecreatefrompng($waterMark['value']);
-				imagecopy($image, $watermark, 0, 0, 0, 0, imagesx($watermark), imagesy($watermark));
-			} else {
-				$positionRight 	= 	$positionX;
-				$positionBottom = 	$positionY;
-				$sx 	= 	imagesx($image);
-				$sy 	= 	imagesy($image);
-				$watermarktext	=	($waterMark['value'] != "") ? $waterMark['value'] : '';
-				$font			=	($waterMark['font-family'] != "") ? $waterMark['font-family'] : '';
-				$fontsize		=	($waterMark['font-size'] != "") ? $waterMark['font-size'] : '';
-				list($r, $g, $b) = sscanf($waterMark['font-color'], "#%02x%02x%02x");
-				$color			=	imagecolorallocate($image, $r, $g, $b);
-				imagettftext($image, $fontsize, 0, $sx - $positionRight, $sy - $positionBottom, $color, $font, $watermarktext);
+		try {
+			if (!empty($waterMark)) {
+				$waterMark['font-size']		=	(empty($waterMark['font-size'])) ? 25 : $waterMark['font-size'];
+				$waterMark['font-family']	=	(empty($waterMark['font-family'])) ? __DIR__ . "/fonts/Myriad-Pro-Regular.ttf" : $waterMark['font-family'];
+				$waterMark['font-color']	=	(empty($waterMark['font-color'])) ? '#000000' : $waterMark['font-color'];
+				$positionX = $waterMark['position-x'] ?? '';
+				$positionY = $waterMark['position-y'] ?? '';
 			}
-		}
 
-		// Creating new width and height with aspect ratio
-		if ($newWidth != "") {
-			$diff 		= 	$width / $newWidth;
-			$newHeight 	= 	$height / $diff;
-		} else {
-			$newWidth 	= 	$width;
-			$newHeight 	= 	$height;
-		}
+			$infoImg 	= 	getimagesize($sourceURL);
+			$width		=	$infoImg[0];
+			$height		=	$infoImg[1];
+			if ($width < $minImgWidth) {
+				echo '<div class="alert alert-danger">Image <strong>WIDTH</strong> is less then ' . $minImgWidth . 'px</div>';
+				exit;
+			}
 
-		$imgResource 	= 	imagecreatetruecolor($newWidth, $newHeight);
+			$image		=	'';
+			if ($infoImg['mime'] == 'image/jpeg') {
+				$image 	= 	imagecreatefromjpeg($sourceURL);
+			} elseif ($infoImg['mime'] == 'image/jpg') {
+				$image 	= 	imagecreatefromjpeg($sourceURL);
+			} elseif ($infoImg['mime'] == 'image/png') {
+				$image 	= 	imagecreatefrompng($sourceURL);
+			} elseif ($infoImg['mime'] == 'image/gif') {
+				$image 	= 	imagecreatefromgif($sourceURL);
+			}
 
-		imagealphablending($imgResource, false);
-		imagesavealpha($imgResource, true);
+			//Adding watermark
+			if (!empty($waterMark)) {
+				if (!empty($waterMark['value']) && is_file($waterMark['value'])) {
+					$watermark 		= 	imagecreatefrompng($waterMark['value']);
+					imagecopy($image, $watermark, 0, 0, 0, 0, imagesx($watermark), imagesy($watermark));
+				} else {
+					$positionRight 	= 	$positionX;
+					$positionBottom = 	$positionY;
+					$sx 	= 	imagesx($image);
+					$sy 	= 	imagesy($image);
+					$watermarktext	=	($waterMark['value'] != "") ? $waterMark['value'] : '';
+					$font			=	($waterMark['font-family'] != "") ? $waterMark['font-family'] : '';
+					$fontsize		=	($waterMark['font-size'] != "") ? $waterMark['font-size'] : '';
+					list($r, $g, $b) = sscanf($waterMark['font-color'], "#%02x%02x%02x");
+					$color			=	imagecolorallocate($image, $r, $g, $b);
+					imagettftext($image, $fontsize, 0, $sx - $positionRight, $sy - $positionBottom, $color, $font, $watermarktext);
+				}
+			}
 
-		imagecopyresampled($imgResource, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-		if ($infoImg['mime'] == 'image/png' || $infoImg['mime'] == 'image/gif') {
-			$newQuality	=	($quality / 10) - 1;
+			// Creating new width and height with aspect ratio
+			if ($newWidth != "") {
+				$diff 		= 	$width / $newWidth;
+				$newHeight 	= 	$height / $diff;
+			} else {
+				$newWidth 	= 	$width;
+				$newHeight 	= 	$height;
+			}
+
+			$imgResource 	= 	imagecreatetruecolor($newWidth, $newHeight);
+
 			imagealphablending($imgResource, false);
 			imagesavealpha($imgResource, true);
-			$RET	=	imagepng($imgResource, $destinationURL, $newQuality); //For png quality range is 0-9
-		} else {
-			$RET	=	imagejpeg($imgResource, $destinationURL, $quality);
+
+			imagecopyresampled($imgResource, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+			if ($infoImg['mime'] == 'image/png' || $infoImg['mime'] == 'image/gif') {
+				$newQuality	=	($quality / 10) - 1;
+				imagealphablending($imgResource, false);
+				imagesavealpha($imgResource, true);
+				$responseImage	=	imagepng($imgResource, $destinationURL, $newQuality); //For png quality range is 0-9
+			} else {
+				$responseImage	=	imagejpeg($imgResource, $destinationURL, $quality);
+			}
+
+			imagedestroy($image);
+			return $responseImage;
+		} catch (Exception $e) {
+			return $e->getMessage();
 		}
-		imagedestroy($image);
-		return $RET;
 	}
 
 	/**
@@ -119,15 +126,19 @@ class FilesUploadAndImageResize
 	 * 
 	 */
 
-	public function createDir($fileDestination, $filePermission)
+	public function createDir(string $fileDestination, int $filePermission): string
 	{
-		if (!file_exists($fileDestination)) {
-			mkdir($fileDestination, $filePermission, true);
-			$fName	=	$fileDestination;
-		} else {
-			$fName	=	$fileDestination;
+		try {
+			if (!file_exists($fileDestination)) {
+				mkdir($fileDestination, $filePermission, true);
+				$fName	=	$fileDestination;
+			} else {
+				$fName	=	$fileDestination;
+			}
+			return $fName;
+		} catch (Exception $e) {
+			return $e->getMessage();
 		}
-		return $fName;
 	}
 
 	/**
@@ -141,73 +152,77 @@ class FilesUploadAndImageResize
 	 * 
 	 */
 
-	public function uploadFiles($fileParamName, $minImgWidth = 400, $waterMark, $reName = "", $quality = 100, $newWidth = "", $thumbWidth = [])
+	public function uploadFiles(string $fileParamName, int $minImgWidth = 400, array $waterMark, string $reName = "", int $quality = 100, string $newWidth = "", array $thumbWidth = []): array|string
 	{
-		if (!empty($_FILES[$fileParamName])) {
+		try {
+			if (!empty($_FILES[$fileParamName])) {
 
-			$srcPath	=	$this->createDir($this->fileDestination, $this->filePermission) . '/';
-			if (isset($thumbWidth) && !empty($thumbWidth)) {
-				$srcThumbPath	=	$this->createDir($this->fileDestination . '/thumb', $this->filePermission) . '/';
-			}
-			foreach ($_FILES[$fileParamName]['name'] as $val) {
-				$this->s++;
-
-				$fileInfo		=	pathinfo(basename($_FILES[$fileParamName]['name'][$this->n]), PATHINFO_EXTENSION);
-				$filesName		=	str_replace(" ", "", trim($_FILES[$fileParamName]['name'][$this->n]));
-				$files			=	explode(".", $filesName);
-				$File_Ext   	=   substr($_FILES[$fileParamName]['name'][$this->n], strrpos($_FILES[$fileParamName]['name'][$this->n], '.'));
-
-				if ($reName != "") {
-					$fileName	=	$this->s . $reName . $File_Ext;
-				} else {
-					if (count($files) > 2) {
-						array_pop($files);
-						$fileName	=	implode(".", $files) . $File_Ext;
-					} else {
-						$fileName	=	$files[0] . $File_Ext;
-					}
+				$srcPath	=	$this->createDir($this->fileDestination, $this->filePermission) . '/';
+				if (isset($thumbWidth) && !empty($thumbWidth)) {
+					$srcThumbPath	=	$this->createDir($this->fileDestination . '/thumb', $this->filePermission) . '/';
 				}
-				$filePath			=	trim($srcPath . $fileName);
-				if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
-					// Upload and compress only images
-					if (strtolower($fileInfo) == 'gif' || strtolower($fileInfo) == 'jpeg' || strtolower($fileInfo) == 'jpg' || strtolower($fileInfo) == 'png') {
-						if ($this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath, $minImgWidth, $waterMark, $quality, $newWidth)) {
-							if (isset($thumbWidth) && !empty($thumbWidth)) {
-								foreach ($thumbWidth as $tw) {
-									$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
-									$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
-									$this->param['uploaded-thumb-files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
-									$this->param['path-uploaded-thumb-files'][]	=	$thumbPath; //All uploaded thumbnail files with complete path
+				foreach ($_FILES[$fileParamName]['name'] as $val) {
+					$this->s++;
+
+					$fileInfo		=	pathinfo(basename($_FILES[$fileParamName]['name'][$this->n]), PATHINFO_EXTENSION);
+					$filesName		=	str_replace(" ", "", trim($_FILES[$fileParamName]['name'][$this->n]));
+					$files			=	explode(".", $filesName);
+					$File_Ext   	=   substr($_FILES[$fileParamName]['name'][$this->n], strrpos($_FILES[$fileParamName]['name'][$this->n], '.'));
+
+					if ($reName != "") {
+						$fileName	=	$this->s . $reName . $File_Ext;
+					} else {
+						if (count($files) > 2) {
+							array_pop($files);
+							$fileName	=	implode(".", $files) . $File_Ext;
+						} else {
+							$fileName	=	$files[0] . $File_Ext;
+						}
+					}
+					$filePath			=	trim($srcPath . $fileName);
+					if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
+						// Upload and compress only images
+						if (strtolower($fileInfo) == 'gif' || strtolower($fileInfo) == 'jpeg' || strtolower($fileInfo) == 'jpg' || strtolower($fileInfo) == 'png') {
+							if ($this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath, $minImgWidth, $waterMark, $quality, $newWidth)) {
+								if (isset($thumbWidth) && !empty($thumbWidth)) {
+									foreach ($thumbWidth as $tw) {
+										$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
+										$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
+										$this->param['uploaded-thumb-files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
+										$this->param['path-uploaded-thumb-files'][]	=	$thumbPath; //All uploaded thumbnail files with complete path
+									}
 								}
-							}
 
-							$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-							$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
+								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
+								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
+							} else {
+								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+							}
 						} else {
-							$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+							// Upload all other files
+							if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
+								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
+								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
+							} else {
+								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+							}
 						}
 					} else {
-						// Upload all other files
-						if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
-							$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-							$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
-						} else {
-							$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
-						}
+						$this->param['bad-extension-files'][]	=	$fileName; //Bad extension files name are move in this array
+						$this->param['bad-extensions'][]		=	strtolower($fileInfo);  //Bad extensions move in this array
 					}
-				} else {
-					$this->param['bad-extension-files'][]	=	$fileName; //Bad extension files name are move in this array
-					$this->param['bad-extensions'][]		=	strtolower($fileInfo);  //Bad extensions move in this array
-				}
 
-				$this->n++;
+					$this->n++;
+				}
+				if ($this->format == "array") {
+					$this->uploadedData	=	$this->param;
+				} else if ($this->format == "json") {
+					$this->uploadedData	=	json_encode($this->param);
+				}
+				return $this->uploadedData;
 			}
-			if ($this->format == "array") {
-				$this->uploadedData	=	$this->param;
-			} else if ($this->format == "json") {
-				$this->uploadedData	=	json_encode($this->param);
-			}
-			return $this->uploadedData;
+		} catch (Exception $e) {
+			return $e->getMessage();
 		}
 	}
 }

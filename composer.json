@@ -1,6 +1,6 @@
 {
 	"name": "learncodeweb/filesupload",
-	"description": "A very simple (GD library Image processing) class for upload multiple files. You can create multiple thumbnails, add watermark (text/image), resize and change the quality of the images.",
+	"description": "A very simple (GD library Image processing) class for upload multiple files. You can create multiple thumbnails, add watermark (text/image), resize and change the quality of the images. You can also use this class with any PHP framework, tested with Laravel 8 and Laravel 9.",
 	"homepage": "https://learncodeweb.com/web-development/resize-and-upload-multiple-images-using-php-and-ajax/",
 	"type": "resize-and-upload-multiple-images-using-php-and-ajax",
 	"keywords": [
@@ -38,7 +38,7 @@
 		"issues": "https://github.com/LearnCodeWeb/multi-files-upload-and-image-resizer/issues"
 	},
 	"require": {
-		"php": ">=5.6.0"
+		"php": ">=7.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^4.8 || ^5.7 || ^7.5.15"
