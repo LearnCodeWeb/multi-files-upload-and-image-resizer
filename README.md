@@ -1,5 +1,9 @@
 # Multi files uploader & image resizer
 
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=MianZaid&show_icons=true)
+
+
 A PHP base class that you can use to upload any file into the server. It is a very lightweight class and highly customizable. You can use this class with any framework or with core PHP.
 
 ## Dependencies:
