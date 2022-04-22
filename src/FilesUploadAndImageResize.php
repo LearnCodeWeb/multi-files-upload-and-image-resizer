@@ -179,30 +179,30 @@ class FilesUploadAndImageResize
 									foreach ($thumbWidth as $tw) {
 										$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
 										$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
-										$this->param['uploaded-thumb-files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
-										$this->param['path-uploaded-thumb-files'][]	=	trim($srcThumbPath); //All uploaded thumbnail files with complete path
+										$this->param['uploaded_thumb_files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
+										$this->param['path_uploaded_thumb_files'][]	=	trim($srcThumbPath); //All uploaded thumbnail files with complete path
 									}
 								}
 
-								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
-								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path-uploaded-files'][]	=	$srcPath; //All uploaded files name are move in this array
+								$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
+								$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
+								$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
 							} else {
-								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
 							}
 						} else {
 							// Upload all other files
 							if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
-								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
-								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path-uploaded-files'][]	=	$srcPath; //All uploaded files name are move in this array
+								$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
+								$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
+								$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
 							} else {
-								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
 							}
 						}
 					} else {
-						$this->param['bad-extension-files'][]	=	$fileName; //Bad extension files name are move in this array
-						$this->param['bad-extensions'][]		=	strtolower($fileInfo);  //Bad extensions move in this array
+						$this->param['bad_extension_files'][]	=	$fileName; //Bad extension files name are move in this array
+						$this->param['bad_extensions'][]		=	strtolower($fileInfo);  //Bad extensions move in this array
 					}
 
 					$this->n++;
