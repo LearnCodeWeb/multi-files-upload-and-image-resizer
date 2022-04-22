@@ -6,14 +6,14 @@ use Exception;
 
 class FilesUploadAndImageResize
 {
-	protected $allowExtension	=	[];
-	protected $fileDestination	=	'';
-	protected $filePermission	=	'0655';
-	protected $n				=	0;
-	protected $s				=	0;
-	protected $format			=	'array';
-	protected $param			=	[];
-	public $uploadedData		=	'';
+	protected array $allowExtension	=	[];
+	protected string $fileDestination	=	'';
+	protected int $filePermission	=	0655;
+	protected int $n				=	0;
+	protected int $s				=	0;
+	protected string $format		=	'array';
+	protected array $param			=	[];
+	public $uploadedData			=	'';
 
 	/**
 	 * Must Initialize main param
@@ -168,7 +168,7 @@ class FilesUploadAndImageResize
 					$fileInfo		=	pathinfo(basename($_FILES[$fileParamName]['name'][$this->n]), PATHINFO_EXTENSION);
 					$fileName		=	'file-' . $this->s . '-' . rand(0, 999) . time() . '.' . $fileInfo;
 					if ($reName != "") {
-						$fileName	=	$this->s . $reName . '.' . $fileInfo;
+						$fileName	=	$reName . $this->s . '.' . $fileInfo;
 					}
 					$filePath			=	trim($srcPath . $fileName);
 					if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
@@ -180,13 +180,13 @@ class FilesUploadAndImageResize
 										$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
 										$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
 										$this->param['uploaded-thumb-files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
-										$this->param['path-uploaded-thumb-files'][]	=	$thumbPath; //All uploaded thumbnail files with complete path
+										$this->param['path-uploaded-thumb-files'][]	=	trim($srcThumbPath); //All uploaded thumbnail files with complete path
 									}
 								}
 
 								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
 								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
+								$this->param['path-uploaded-files'][]	=	$srcPath; //All uploaded files name are move in this array
 							} else {
 								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
 							}
@@ -195,7 +195,7 @@ class FilesUploadAndImageResize
 							if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
 								$this->param['real-uploaded-files'][] = $val; //All uploaded files with real name
 								$this->param['uploaded-files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path-uploaded-files'][]	=	$filePath; //All uploaded files name are move in this array
+								$this->param['path-uploaded-files'][]	=	$srcPath; //All uploaded files name are move in this array
 							} else {
 								$this->param['not-uploaded-files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
 							}
