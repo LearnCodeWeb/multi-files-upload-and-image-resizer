@@ -13,6 +13,16 @@ class FilesUploadAndImageResize
 	protected int $s				=	0;
 	protected string $format		=	'array';
 	protected array $param			=	[];
+	protected array $phpFileUploadErrors = [
+		0 => 'There is no error, the file uploaded with success',
+		1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+		2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+		3 => 'The uploaded file was only partially uploaded',
+		4 => 'No file was uploaded',
+		6 => 'Missing a temporary folder',
+		7 => 'Failed to write file to disk.',
+		8 => 'A PHP extension stopped the file upload.',
+	];
 	public $uploadedData			=	'';
 
 	/**
@@ -174,21 +184,26 @@ class FilesUploadAndImageResize
 					if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
 						// Upload and compress only images
 						if (strtolower($fileInfo) == 'gif' || strtolower($fileInfo) == 'jpeg' || strtolower($fileInfo) == 'jpg' || strtolower($fileInfo) == 'png') {
-							if ($this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath, $minImgWidth, $waterMark, $quality, $newWidth)) {
-								if (isset($thumbWidth) && !empty($thumbWidth)) {
-									foreach ($thumbWidth as $tw) {
-										$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
-										$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
-										$this->param['uploaded_thumb_files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
-										$this->param['path_uploaded_thumb_files'][]	=	trim($srcThumbPath); //All uploaded thumbnail files with complete path
-									}
-								}
-
-								$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
-								$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
-							} else {
+							if ($_FILES[$fileParamName]['tmp_name']['error'] > 0) {
 								$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								$this->param['not_uploaded_files_error'][]	=	$this->phpFileUploadErrors[$_FILES[$fileParamName]['tmp_name']['error']]; //All not move files name into the destination folder with error [ Note: Check Folder Permission ]
+							} else {
+								if ($this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath, $minImgWidth, $waterMark, $quality, $newWidth)) {
+									if (isset($thumbWidth) && !empty($thumbWidth)) {
+										foreach ($thumbWidth as $tw) {
+											$thumbPath		=	trim($srcThumbPath . $tw . '-' . $fileName);
+											$this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $thumbPath, $minImgWidth, $waterMark, $quality, $tw);
+											$this->param['uploaded_thumb_files'][$tw][]	=	$tw . '-' . $fileName; //All uploaded thumbnail files name are move in this array
+											$this->param['path_uploaded_thumb_files'][]	=	trim($srcThumbPath); //All uploaded thumbnail files with complete path
+										}
+									}
+
+									$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
+									$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
+									$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
+								} else {
+									$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								}
 							}
 						} else {
 							// Upload all other files
