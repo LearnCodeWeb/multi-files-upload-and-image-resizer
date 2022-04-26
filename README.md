@@ -140,9 +140,9 @@ print_r($upload->uploadedData);
 print "</pre>";
 ```
 
-## Upload file size change on server
+## Upload file size change on the server
 
-There is a possibility the upload file size is not set on a server, default 2MB value is set on a server. If you face this type of issue just find the right path of your **php.ini** file and change the bleow two parameters.
+There is a possibility the upload file size is not set on a server, the default 2MB value is set on a server. If you face this type of issue just find the right path of your php.ini file and change the bleow two parameters.
 
 ```
 upload_max_filesize = 2M
@@ -157,4 +157,4 @@ post_max_size = 150M
 ```
 
 ### Remember:
-post max size should be grater than upload max filesize.
+post max size should be greater than upload max filesize.
