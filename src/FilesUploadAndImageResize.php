@@ -182,12 +182,12 @@ class FilesUploadAndImageResize
 					}
 					$filePath			=	trim($srcPath . $fileName);
 					if (in_array(strtolower($fileInfo), array_map('strtolower', $this->allowExtension)) || empty($this->allowExtension)) {
-						// Upload and compress only images
-						if (strtolower($fileInfo) == 'gif' || strtolower($fileInfo) == 'jpeg' || strtolower($fileInfo) == 'jpg' || strtolower($fileInfo) == 'png') {
-							if (isset($_FILES[$fileParamName]['error'][$this->n]) && $_FILES[$fileParamName]['error'][$this->n] > 0) {
-								$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
-								$this->param['not_uploaded_files_error'][]	=	$this->phpFileUploadErrors[$_FILES[$fileParamName]['error']]; //All not move files name into the destination folder with error [ Note: Check Folder Permission ]
-							} else {
+						if (isset($_FILES[$fileParamName]['error'][$this->n]) && $_FILES[$fileParamName]['error'][$this->n] > 0) {
+							$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+							$this->param['not_uploaded_files_error'][]	=	$this->phpFileUploadErrors[$_FILES[$fileParamName]['error'][$this->n]]; //All not move files name into the destination folder with error [ Note: Check Folder Permission ]
+						} else {
+							// Upload and compress only images
+							if (strtolower($fileInfo) == 'gif' || strtolower($fileInfo) == 'jpeg' || strtolower($fileInfo) == 'jpg' || strtolower($fileInfo) == 'png') {
 								if ($this->compressImage($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath, $minImgWidth, $waterMark, $quality, $newWidth)) {
 									if (isset($thumbWidth) && !empty($thumbWidth)) {
 										foreach ($thumbWidth as $tw) {
@@ -204,15 +204,15 @@ class FilesUploadAndImageResize
 								} else {
 									$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
 								}
-							}
-						} else {
-							// Upload all other files
-							if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
-								$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
-								$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
-								$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
 							} else {
-								$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								// Upload all other files
+								if (move_uploaded_file($_FILES[$fileParamName]['tmp_name'][$this->n], $filePath)) {
+									$this->param['real_uploaded_files'][] = $val; //All uploaded files with real name
+									$this->param['uploaded_files'][]	=	$fileName; //All uploaded files name are move in this array
+									$this->param['path_uploaded_files'][]	=	$srcPath; //All uploaded files name are move in this array
+								} else {
+									$this->param['not_uploaded_files'][]	=	$fileName; //All not move files name into the destination folder [ Note: Check Folder Permission ]
+								}
 							}
 						}
 					} else {
