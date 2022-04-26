@@ -5,11 +5,11 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 
 <div align="center">
     
-![GitHub file size in bytes](https://img.shields.io/github/size/learncodeweb/multi-files-upload-and-image-resizer/src/FilesUploadAndImageResize.php?label=Class%20File%20Size)
 ![GitHub](https://img.shields.io/github/license/learncodeweb/multi-files-upload-and-image-resizer?label=License)
+![GitHub file size in bytes](https://img.shields.io/github/size/learncodeweb/multi-files-upload-and-image-resizer/src/FilesUploadAndImageResize.php?label=Main%20Class%20File%20Size)
 ![GitHub all releases](https://img.shields.io/github/downloads/LearnCodeWeb/multi-files-upload-and-image-resizer/total?label=GitHub%20Download)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/learncodeweb/filesupload?label=Composer%20Install)
-![GitHub repo size](https://img.shields.io/github/repo-size/learncodeweb/multi-files-upload-and-image-resizer?label=Repo%20Size)
+![GitHub repo size](https://img.shields.io/github/repo-size/learncodeweb/multi-files-upload-and-image-resizer?label=Total%20Repo.%20Size)
 
 </div>
     
