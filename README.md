@@ -2,6 +2,7 @@
 
 A PHP base class that you can use to upload any file into the server. It is a very lightweight class and highly customizable. You can use this class with any framework or with core PHP.
 
+![GitHub file size in bytes](https://img.shields.io/github/size/learncodeweb/multi-files-upload-and-image-resizer/src/FilesUploadAndImageResize.php?label=Class%20File%20Size)
 ![GitHub](https://img.shields.io/github/license/learncodeweb/multi-files-upload-and-image-resizer?label=License)
 ![GitHub all releases](https://img.shields.io/github/downloads/LearnCodeWeb/multi-files-upload-and-image-resizer/total?label=GitHub%20Download)
 ![Packagist Downloads](https://img.shields.io/packagist/dt/learncodeweb/filesupload?label=Composer%20Install)
