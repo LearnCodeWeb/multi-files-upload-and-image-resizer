@@ -2,6 +2,10 @@
 
 A PHP base class that you can use to upload any file into the server. It is a very lightweight class and highly customizable. You can use this class with any framework or with core PHP.
 
+
+![GitHub all releases](https://img.shields.io/github/downloads/LearnCodeWeb/multi-files-upload-and-image-resizer/total?label=GitHub%20Download)
+![Packagist Downloads](https://img.shields.io/packagist/dt/learncodeweb/filesupload?label=Composer%20Install)
+
 ## Dependencies:
 
 This class is based on the GD library for image processing. If you don’t have this library install it or enable it in php.ini. To install the GD library use the below command.
