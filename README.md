@@ -145,15 +145,15 @@ print "</pre>";
 There is a possibility the upload file size is not set on a server, default 2MB value is set on a server. If you face this type of issue just find the right path of your **php.ini** file and change the bleow two parameters.
 
 ```
-**upload_max_filesize** = 2M
-**post_max_size** = 8M
+upload_max_filesize = 2M
+post_max_size = 8M
 ```
 
 Change to below.
 
 ```
-**upload_max_filesize** = 100M
-**post_max_size** = 150M
+upload_max_filesize = 100M
+post_max_size = 150M
 ```
 
 ### Remember:
