@@ -11,6 +11,10 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 ![Packagist Downloads](https://img.shields.io/packagist/dt/learncodeweb/filesupload?label=Composer%20Install)
 ![GitHub repo size](https://img.shields.io/github/repo-size/learncodeweb/multi-files-upload-and-image-resizer?label=Total%20Repo.%20Size)
 
+<a href="https://buy.stripe.com/cN27sG0UU9gp2xa3cc">
+    <img src="https://img.shields.io/badge/Donate-Add%20Your%20Contribution-green" alt="Donate with love" title="Donate" width="400">
+</a>
+    
 </div>
     
 ## Dependencies:
@@ -169,3 +173,9 @@ post_max_size = 150M
 
 ### Remember:
 post max size should be greater than upload max filesize.
+
+
+<a href="https://www.buymeacoffee.com/MG1mNqy">
+    <img src="https://img.shields.io/badge/Donate-Buy%20Learn%20Code%20Web%20a%20coffee-green" alt="Donate with love" title="Donate" width="400">
+</a>
+
