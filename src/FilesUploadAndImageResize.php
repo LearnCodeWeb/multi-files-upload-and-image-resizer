@@ -166,12 +166,12 @@ class FilesUploadAndImageResize
 	public function uploadFiles(string $fileParamName, int $minImgWidth = 400, array $waterMark, string $reName = "", int $quality = 100, string $newWidth = "", array $thumbWidth = []): array|string
 	{
 		try {
-			if (!extension_loaded('gd')) {
-			    if (!dl('gd.so')) {
-				$this->param['gd_extension'][]		=	'Check your php.ini file and enable or insatll GD extension';  //Bad extensions move in this array
-				exit;
-			    }
-			}
+// 			if (!extension_loaded('gd')) {
+// 			    if (!dl('gd.so')) {
+// 				$this->param['gd_extension'][]		=	'Check your php.ini file and enable or insatll GD extension';  //Bad extensions move in this array
+// 				exit;
+// 			    }
+// 			}
 			if (!empty($_FILES[$fileParamName])) {
 
 				$srcPath	=	$this->createDir($this->fileDestination, $this->filePermission) . '/';
