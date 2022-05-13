@@ -54,7 +54,7 @@ class FilesUploadAndImageResize
 		try {
 			//Check if GD extension is enable or not
 			if (!extension_loaded('gd')) {
-				return $this->param['gd_extension'][] = 'Check your php.ini file and enable or insatll GD extension';  //Extensions missing
+				return $this->param['gd_extension'] = '[Files not moved] - Check your php.ini file and enable or insatll GD extension';  //Extensions missing
 				exit;
 			}
 			if (!empty($waterMark)) {
