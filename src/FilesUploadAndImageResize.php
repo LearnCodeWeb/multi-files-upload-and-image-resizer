@@ -52,6 +52,11 @@ class FilesUploadAndImageResize
 	public function compressImage(string $sourceURL, string $destinationURL, int $minImgWidth, array $waterMark = [], int $quality, string $newWidth): bool|string
 	{
 		try {
+			//Check if GD extension is enable or not
+			if (!extension_loaded('gd')) {
+				return $this->param['gd_extension'][] = 'Check your php.ini file and enable or insatll GD extension';  //Extensions missing
+				exit;
+			}
 			if (!empty($waterMark)) {
 				$waterMark['font-size']		=	(empty($waterMark['font-size'])) ? 25 : $waterMark['font-size'];
 				$waterMark['font-family']	=	(empty($waterMark['font-family'])) ? __DIR__ . "/fonts/Myriad-Pro-Regular.ttf" : $waterMark['font-family'];
@@ -166,12 +171,6 @@ class FilesUploadAndImageResize
 	public function uploadFiles(string $fileParamName, int $minImgWidth = 400, array $waterMark, string $reName = "", int $quality = 100, string $newWidth = "", array $thumbWidth = []): array|string
 	{
 		try {
-// 			if (!extension_loaded('gd')) {
-// 			    if (!dl('gd.so')) {
-// 				$this->param['gd_extension'][]		=	'Check your php.ini file and enable or insatll GD extension';  //Bad extensions move in this array
-// 				exit;
-// 			    }
-// 			}
 			if (!empty($_FILES[$fileParamName])) {
 
 				$srcPath	=	$this->createDir($this->fileDestination, $this->filePermission) . '/';
