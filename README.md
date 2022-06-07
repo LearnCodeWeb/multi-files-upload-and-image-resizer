@@ -105,7 +105,7 @@ A PHP base class that you can use to upload any file into the server. It is a ve
 |   Parameters          |   Default Value   |   Description    |
 |-----------------------|-------------------|------------------|
 |   Input index name    |   User set        |   You can set your input="file" name should be an array like name="yourIndexName[]".   |
-|   Check minimum with  |   400             |   Default min with is 400, you can change with any number.    |
+|   Check minimum width |   400             |   Default min with is 400, you can change with any number.    |
 |   Watermark           |   empty           |   You can set the watermark array to see the below details.  |
 |   Re-name             |   empty           |   Rename the uploaded file if you need it. Left empty get system created default name.    |
 |   Image Quality       |   100             |   Image quality in percent 1-100. Apply only for images (jpg,jpeg,png,gif).    |
