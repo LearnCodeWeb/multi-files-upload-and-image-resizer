@@ -50,10 +50,5 @@
 		"classmap": [
 			"./src/FilesUploadAndImageResize.php"
 		]
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "1.0-dev"
-		}
 	}
 }
