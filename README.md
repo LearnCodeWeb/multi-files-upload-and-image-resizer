@@ -56,12 +56,12 @@ composer dump-autoload
 ----
 
 ## How to import into the project:
-In laravel 8/9 (Tested)
+In laravel 8+ (Tested)
 ```php
 use anyFileUpload\FilesUploadAndImageResize as anyFilesUpload;
 
 $files = new anyFilesUpload('array', ['jpg', 'jpeg', 'png'], public_path('uploads'), 0777);
-$files->uploadFiles('files', 250, '', '', 100, '850', ['350']);
+$files->uploadFiles('files', 250, [], '', 100, '850', ['350']);
 
 dd($files->uploadedData);
 ```
