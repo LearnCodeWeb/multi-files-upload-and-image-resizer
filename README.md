@@ -44,7 +44,7 @@ extension=gd
 ## Composer installation:
 
 ```
-composer require learncodeweb/filesupload
+composer require learncodeweb/filesupload:dev-main
 ```
 
 After installation recreates the autoload file with the help of the below command.
