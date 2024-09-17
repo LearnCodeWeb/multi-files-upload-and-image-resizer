@@ -27,13 +27,11 @@ class FilesUploadAndImageResize
 
 	/**
 	 * Must Initialize main param
-	 * @param 
-	 * 1) Format set the return result set array or json
-	 * 2) Pass file extentions in array
-	 * 3) Dir path where you want to upload the files *thumb folder will be craeted inside
-	 * 
+	 * @param format string (array or json)
+	 * @param extension []
+	 * @param path
+	 * @param permission 0755, 644 etc
 	 */
-
 	public function __construct(string $format, array $allowExtension, string $fileDestination, int $filePermission)
 	{
 		$this->format			=	strtolower($format);
@@ -46,9 +44,13 @@ class FilesUploadAndImageResize
 	 * Image compress and processing
 	 * Main function that we used to compress images
 	 * Consider only jpeg,jpg,png,gif images [If you want to use other extensions then use Imagick]
-	 * 
+	 * @param file source string
+	 * @param destination url string
+	 * @param min. image width integer
+	 * @param watermark file path []
+	 * @param image quality integer
+	 * @param resize new width
 	 */
-
 	public function compressImage(string $sourceURL, string $destinationURL, int $minImgWidth, array $waterMark = [], int $quality, string $newWidth): bool|string
 	{
 		try {
@@ -137,11 +139,10 @@ class FilesUploadAndImageResize
 	/**
 	 * Create folder with permission
 	 * If exist no need to create
-	 * @param folder path and permission [default = 0655]
-	 * 
+	 * @param folder path
+	 * @param permission integer  0755, 0644 permission [default = 0655]
 	 */
-
-	public function createDir(string $fileDestination, int $filePermission): string
+	public function createDir(string $fileDestination, int $filePermission = 0655): string
 	{
 		try {
 			if (!file_exists($fileDestination)) {
@@ -160,14 +161,21 @@ class FilesUploadAndImageResize
 	 * Main function to upload files
 	 * This function return Array with status & names
 	 * Array index tells the status of files
-	 * ['bad-extension-files'] return all files with bad extension which is set by user
-	 * ['bad-extensions'] return only bad extensions which is set by user
-	 * ['uploaded-files'] return all uploaded files
-	 * ['real-uploaded-files'] return all uploaded real files name.
-	 * ['not-uploaded-files'] return all not move files into the destination folder [ Note: Folder (Dir) Permission issue ]
+	 * @param input file type name 
+	 * @param min. image width integer
+	 * @param watermark file path array
+	 * @param rename file string
+	 * @param quality 1-100 integer only for images
+	 * @param image resize width
+	 * @param thumbnail sizes in array [350, 650 etc]
+	 * 
+	 * @return ['bad-extension-files'] return all files with bad extension which is set by user
+	 * @return ['bad-extensions'] return only bad extensions which is set by user
+	 * @return ['uploaded-files'] return all uploaded files
+	 * @return ['real-uploaded-files'] return all uploaded real files name.
+	 * @return ['not-uploaded-files'] return all not move files into the destination folder [ Note: Folder (Dir) Permission issue ]
 	 * 
 	 */
-
 	public function uploadFiles(string $fileParamName, int $minImgWidth = 400, array $waterMark, string $reName = "", int $quality = 100, string $newWidth = "", array $thumbWidth = []): array|string
 	{
 		try {
