@@ -226,7 +226,7 @@ class FilesUploadAndImageResize
 					}
 				}
 
-				return $this->format === "json" ? json_encode($this->param) : $this->param;
+				return $this->uploadedData	=	$this->format === "json" ? json_encode($this->param) : $this->param;
 			}
 		} catch (Exception $e) {
 			return $e->getMessage();
